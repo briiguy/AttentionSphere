@@ -1,1 +1,48 @@
-*{font-family:Helvetica, Arial, sans-serif;box-sizing:border-box}h1{font-size:300px;text-align:center;color:fuchsia}
+* {
+	font-family: Helvetica, Arial, sans-serif;
+	box-sizing: border-box;
+}
+html{
+	background-color:grey;
+}
+#searchform *{
+  position:absolute;
+  left:15%;
+}
+#submitButton{
+	left:35%;
+}
+#searchform i{
+	position:static;
+}
+.searchbox{
+  position:relative;
+  height:90px;
+  border:solid black 2px;
+  width:185px;
+  margin: 0 auto;
+}
+.listing img{
+	 max-height:100px;
+	width:100px;
+
+}
+.listingText a{
+	text-decoration: none;
+	color:black;
+
+}
+.listingText a:hover {
+    color: #660066;
+}
+.listing{
+	 
+	border: solid black 2px;
+	display: flex;
+	flex-direction: row;
+}
+h1 {
+	font-size: 30px;
+	text-align: center;
+	color: fuchsia;
+}

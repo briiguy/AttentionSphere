@@ -1,4 +1,4 @@
-global.PROJECT_NAME = null
+global.PROJECT_NAME = 'attentionSphere'
 
 if (!global.PROJECT_NAME) { //« set by npm run init-dev »
 	throw new Error('no project name set. did you forget to run "npm run init-dev"?')
@@ -6,7 +6,7 @@ if (!global.PROJECT_NAME) { //« set by npm run init-dev »
 // x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x
 
 
-
+const request = require('request');
 const bodyParser = require('body-parser');
 const express = require('express');
 const cookieParser = require('cookie-parser');

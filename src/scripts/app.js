@@ -3,11 +3,13 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Underscore from 'underscore'
 import ACTIONS from './components.js'
+
 //import googleTrends from './google-trends-api'
 //console.log(googleTrends)
 // #
 
 const app = function() {
+
 	Array.prototype.show=function(){console.log(this)}
 	String.prototype.show=function(){console.log(this)}
 
@@ -16,7 +18,6 @@ const app = function() {
 	url: 'https://www.reddit.com',
 
 	parse: function(rawJSONP){
-		console.log(rawJSONP)
 		console.log(rawJSONP.data.children)
 		return rawJSONP.data.children
 		},
@@ -64,7 +65,7 @@ const app = function() {
 
 
 		render: function(){
-			console.log('this??'+this)
+			
 			return(
 				<div className='models'>
 				<ListWrapper collection = {this.props.collection}/>
@@ -76,11 +77,11 @@ const app = function() {
 	const ListWrapper = React.createClass({
 
 		_getJsxArray: function(listingArr){
-			 console.log('here comes listingArr', listingArr)
+			 
 			var jsxArr = []
 			listingArr.forEach(function(listing){
 
-				console.log(listing.attributes.data.id)
+				
 				jsxArr.push(<Listing key={listing.attributes.data.id} listingModel={listing} />)
 			})
 			return jsxArr
@@ -98,7 +99,7 @@ const app = function() {
 	var Listing = React.createClass({
 		
 		render: function(){
-			console.log(this)
+			
 			// console.log('this in listing component>>> ',this.props.listingModel)
 		var item = this.props.listingModel.attributes.data
 		var img = <div className='listingImg'><a href={item.url} target="_blank" ><img src={item.thumbnail}/></a></div>
@@ -126,6 +127,7 @@ const app = function() {
 	routes:{
 		'home': 'showHomePage',
 		'search/:query': 'showSearchResults',
+		'testroute':'test',
 		'*catchall': 'redirectToHome'
 	},
 	showHomePage: function(){
@@ -162,6 +164,9 @@ const app = function() {
 			console.log('resp',resp)
 			console.log('err',err)
 		})
+	},
+	test: function(){
+
 	},
 	redirectToHome: function(){
 		location.hash = "home"
