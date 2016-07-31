@@ -17,6 +17,13 @@ const usersSchema = new Schema({
 
 })
 
+const subredditSchema = new Schema({
+	name: {type: String, required: true}
+})
+
+
+
 module.exports = {
-  User: createModel('User', usersSchema)
+  User: createModel('User', usersSchema),
+  Subreddit: createModel('Subreddit', subredditSchema)
 }

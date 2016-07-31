@@ -3,6 +3,7 @@ const apiRouter = Router()
 let helpers = require('../config/helpers.js')
 
 let User = require('../db/schema.js').User
+let Subreddit = require('../db/schema.js').Subreddit
 
   
   apiRouter
@@ -46,6 +47,31 @@ let User = require('../db/schema.js').User
     })
 
     // Routes for a Model(resource) should have this structure
+
+    apiRouter.post('/subreddits', function(request, response) {
+    let subreddit = new Subreddit(request.body) //create new instance of schema from a MONGOOSE model, request.body is all the information that we have taken from the client side and we send it on the body of the request to the server
+    subreddit.save(function(error) { //saves to db
+        if(error) {
+            response.send(error)
+            
+        }
+        else {
+            response.json(subreddit)
+        }
+    })
+})
+
+    apiRouter.get('/subreddits', function(request, response) {
+        Subreddit.find(request.query, function(error, records){  //some methods live directly on the model, so you don't need to create a new instance.
+        // request.query parses the parameters and turns them into an object (at this moment we have it just in case)
+            if(error) {
+                response.send(error)
+            }
+            else {
+                response.json(records)
+            }
+      })
+})
 
 
 module.exports = apiRouter

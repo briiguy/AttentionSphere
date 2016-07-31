@@ -2,8 +2,9 @@ import Backbone from 'backbone'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Underscore from 'underscore'
-import ACTIONS from './components.js'
-
+import ACTIONS from './actions.js'
+import init from './init'
+import {User, LinkModel, LinkCollection} from './models/models'
 //import googleTrends from './google-trends-api'
 //console.log(googleTrends)
 // #
@@ -14,24 +15,8 @@ const app = function() {
 	String.prototype.show=function(){console.log(this)}
 
 
-	var LinkCollection = Backbone.Collection.extend({
-	url: 'https://www.reddit.com',
-
-	parse: function(rawJSONP){
-		console.log(rawJSONP.data.children)
-		return rawJSONP.data.children
-		},
 	
-})
-// 	var LinkModel = Backbone.Model.extend({
-// 	url: 'https://www.reddit.com/r/all/new.json',
-
-// 	parse: function(rawJSONP){
-// 		console.log(rawJSONP)
-// 		return rawJSONP.results
-// 		}
-// })
-
+	
 
 	const Header = React.createClass({
 		render: () => {
@@ -131,7 +116,11 @@ const app = function() {
 		'*catchall': 'redirectToHome'
 	},
 	showHomePage: function(){
-		
+		// var coll = new SubredditCollection()
+  //     coll.fetch().then(function(){
+  //       console.log(coll)
+  //     })
+        
 		console.log('hi')
 
 		ReactDOM.render(<Header/>,document.querySelector('.container'))
@@ -154,7 +143,9 @@ const app = function() {
 		var resArray =subtab.split(':')
 		ReactDOM.render(<Header/>,document.querySelector('.container'))
 		var activeCollections = new LinkCollection()
-		activeCollections.url += '/r/'+resArray[0]+'/'+resArray[1]+'.json'
+		if(!resArray[1]){activeCollections.url += '/r/'+resArray[0]+'.json'}
+			else{activeCollections.url += '/r/'+resArray[0]+'/'+resArray[1]+'.json'}
+		
 		activeCollections.fetch().then(function(){
 			'fetched'.show()
 			console.log(activeCollections.models)
@@ -181,5 +172,5 @@ const app = function() {
 	})
 	new SphereRouter()
 }
-
+export const app_name = init()
 app()
